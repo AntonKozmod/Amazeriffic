@@ -1,19 +1,11 @@
 var express = require("express"),
 	http = require("http"),
+	app = express(),
 	mongoose = require("mongoose"),
-	app = express(); /*,
-	toDos = [
-		// настраиваем список задач копированием
-		// содержимого из файла todos.OLD.json
-	];*/
-	// импортируем библиотеку mongoose
+	ToDo = require("./models/todo.js");	
+	
 app.use(express.static(__dirname + "/client"));
 // Это модель Mongoose для задач
-var ToDoSchema = mongoose.Schema({
-	description: String,
-	tags: [ String ]
-});
-var ToDo = mongoose.model("ToDo", ToDoSchema);
 http.createServer(app).listen(3000);
 // Этот маршрут замещает наш файл
 // todos.json в примере из части 5
