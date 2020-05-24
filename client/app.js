@@ -147,15 +147,20 @@ var main = function (toDoObjects) {
 		var $aElement = $("<a>").attr("href",""),
 			$spanElement = $("<span>").text(tab.name);
 		$aElement.append($spanElement);
+		$("main .tabs").append($aElement);
+
 		$spanElement.on("click", function () {
 			var $content;
 			$(".tabs a span").removeClass("active");
 			$spanElement.addClass("active");
 			$("main .content").empty();
-			// здесь мы получаем содержимое из функции,
-			// определенной в объекте tab
-			$content = tab.content();
-			$("main .content").append($content);
+			tab.content(function (err, $content) {
+				if (err !== null) {
+					alert ("Возникла проблема при обработке запроса: " + err);
+				} else {
+					$("main .content").append($content);
+				}
+			});
 			return false;
 		});
 	});
