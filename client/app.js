@@ -84,7 +84,7 @@ var main = function (toDoObjects) {
 
 	// добавляем вкладку Теги
 	tabs.push({
-		"name": "Теги";
+		"name": "Теги",
 		"content":function (callback) {
 			$.get("todos.json", function (toDoObjects) {	
 				// создание $content для Теги 
@@ -110,7 +110,7 @@ var main = function (toDoObjects) {
 
 	// создаем вкладку Добавить
 	tabs.push({
-		"name": "Добавить";
+		"name": "Добавить",
 		"content":function () {
 			$.get("todos.json", function (toDoObjects) {	
 				// создание $content для Добавить 
