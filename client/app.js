@@ -36,10 +36,8 @@ var liaWithDeleteOnClick = function(todo) {
 	console.log("todo.description: " + todo.description);
 	$todoRemoveLink.on("click", function () {
 		$.ajax({
-			url: "todos/" + todo._id,
+			url: "localhost:3000/todos/" + todo._id,
 			type: "DELETE",
-			dataType: 'jsonp',
-      		jsonp: 'jsonp'
 		}).done(function (responde) {
 			$(".tabs a:first-child span").trigger("click");
 		}).fail(function (err) {
@@ -59,11 +57,9 @@ var liaWithEditOnClick = function (todo) {
 		var newDescription = prompt("Введите новое наименование для задачи", todo.description);
 		if (newDescription !== null && newDescription.trim() !== "") {
 			$.ajax({
-				"url": "todos/" + todo._id,
+				"url": "localhost:3000/todos/" + todo._id,
 				"type": "PUT",
 				"data": { "description": newDescription },
-				"dataType": 'jsonp',
-      			"jsonp": 'jsonp'
 			}).done(function (responde) {
 				$(".tabs a:nth-child(2) span").trigger("click");
 			}).fail(function (err) {
