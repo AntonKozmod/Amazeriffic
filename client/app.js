@@ -104,7 +104,7 @@ var main = function (toDoObjects) {
 				var $content,
 					i;
 				$content = $("<ul>");
-				for (i = 0; i < toDoObjects.length, i++) {
+				for (i = 0; i < toDoObjects.length; i++) {
 					var $todoListItem = liaWithEditOnClick(toDoObjects[i]);
 					$content.append($todoListItem);
 				}
