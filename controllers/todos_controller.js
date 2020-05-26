@@ -81,7 +81,7 @@ ToDosController.create = function (req, res) {
 
 ToDosController.destroy = function (req, res) {
 	var id = req.params.id;
-	ToDo.deleteOne({"_id": id}, function (err, todo) {
+	ToDo.deleteOne({"_id": _id}, function (err, todo) {
 		if (err !== null) {
 			res.status(500).json(err);
 		} else {
