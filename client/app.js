@@ -36,7 +36,7 @@ var liaWithDeleteOnClick = function(todo) {
 	console.log("todo.description: " + todo.description);
 	$todoRemoveLink.on("click", function () {
 		$.ajax({
-			"url": "todos/" + todo._id,
+			"url": "todos.json/" + todo._id,
 			"type": "DELETE"
 		}).done(function (responde) {
 			$(".tabs a:first-child span").trigger("click");
@@ -63,6 +63,7 @@ var liaWithEditOnClick = function (todo) {
 			}).done(function (responde) {
 				$(".tabs a:nth-child(2) span").trigger("click");
 			}).fail(function (err) {
+				console.log("Произошла ошибка: " + err);
 			});
 		}
 		return false;
