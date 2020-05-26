@@ -77,7 +77,21 @@ ToDosController.create = function (req, res) {
 			});
 		}
 	});
-	
+}
+
+ToDosController.destroy = function (req, res) {
+	var id = req.params.id;
+	ToDo.deleteOne({"_id": id}, function (err, todo) {
+		if (err !== null) {
+			res.status(500).json(err);
+		} else {
+			if (todo.n === 1 && todo.ok === 1 && todo.deletedCount === 1) {
+				res.status(200).json(todo);
+			} else {
+				res.status(404).json({"status": 404});
+			}
+		}
+	});
 }
 
 module.exports = ToDosController;

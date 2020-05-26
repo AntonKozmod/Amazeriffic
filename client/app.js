@@ -28,34 +28,45 @@ var organizeByTags = function (toDoObjects) {
 	return tagObjects;
 };
 
+var liaWithDeleteOnClick = function(todo) {
+	var $todoListItem = $("<li>").text(todo.description),
+		$todoRemoveLink = $("<a>").attr("href", "todos/" + todo._id);
+	$todoRemoveLink.text("Удалить");
+	console.log("todo._id: " + todo._id);
+	console.log("todo.description: " + todo.description);
+	$todoRemoveLink.on("click", function () {
+		$.ajax({
+			"url": "todos/" + todo._id,
+			"type": "DELETE"
+		}).done(function (responde) {
+			$(".tabs a:first-child span").trigger("click");
+		}).fail(function (err) {
+			console.log("error on delete 'todo'!");
+		});
+		return false;
+	});
+	$todoListItem.append($todoRemoveLink);
+	return $todoListItem;
+}
+
 var main = function (toDoObjects) {
 	"use strict";
-	var toDos = toDoObjects.map(function (toDo) {
-		// Просто возвращаем описание этой задачи
-		return toDo.description;
-	});
-	// создание пустого массива с вкладками
-	var tabs = [];
-
 	// добавляем вкладку Новые
 	tabs.push({
 		"name": "Новые",
 		// создаем функцию content
 		// так, что она принимает обратный вызов
 		"content": function(callback) {
-			$.get("todos.json", function (toDoObjects) {
-				// создаем $content для Новые
-				var $content = $("<ul>");
-				toDos = toDoObjects.map(function (toDo) {
-					return toDo.description;
-				});
-				// генерация и отображения содержимого вкладки Новые
-				for (var i = toDos.length-1; i >= 0; i--) {
-					$content.append($("<li>").text(toDos[i]));
+			$.getJSON("todos.json", function (toDoObjects) {
+				var $content,
+					i;
+				$content = $("<ul>");
+				for (i = toDoObjects.length-1; i>=0; i--) {
+					var $todoListItem = liaWithDeleteOnClick(toDoObjects[i]);
+					$content.append($todoListItem);
 				}
 				callback(null, $content);
 			}).fail(function (jqXHR, textStatus, error) {
-				// в этом случае мы отправляем ошибку вместе с null для $content
 				callback(error, null);
 			});
 		}
