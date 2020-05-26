@@ -29,5 +29,5 @@ app.post("/todos", ToDosController.create);
 
 app.get("/user/:username/todos.json", ToDosController.index);
 app.post("/user/:username/todos", ToDosController.create);
-//app.put("/user/:username/todos/:id", ToDosController.update);
+app.put("/user/:username/todos/:id", ToDosController.update);
 app.delete("/user/:username/todos/:id", ToDosController.destroy);
