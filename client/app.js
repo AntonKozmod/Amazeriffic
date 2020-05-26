@@ -36,7 +36,7 @@ var liaWithDeleteOnClick = function(todo) {
 	console.log("todo.description: " + todo.description);
 	$todoRemoveLink.on("click", function () {
 		$.ajax({
-			url: "192.168.8.101:3000/todos/" + todo._id,
+			url: "/todos/" + todo._id,
 			type: "DELETE",
 		}).done(function (responde) {
 			$(".tabs a:first-child span").trigger("click");
@@ -57,7 +57,7 @@ var liaWithEditOnClick = function (todo) {
 		var newDescription = prompt("Введите новое наименование для задачи", todo.description);
 		if (newDescription !== null && newDescription.trim() !== "") {
 			$.ajax({
-				"url": "192.168.8.101:3000/todos/" + todo._id,
+				"url": "/todos/" + todo._id,
 				"type": "PUT",
 				"data": { "description": newDescription },
 			}).done(function (responde) {
