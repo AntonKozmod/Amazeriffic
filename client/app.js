@@ -57,9 +57,9 @@ var liaWithEditOnClick = function (todo) {
 		var newDescription = prompt("Введите новое наименование для задачи", todo.description);
 		if (newDescription !== null && newDescription.trim() !== "") {
 			$.ajax({
-				url: "todos/" + todo._id,
-				type: "PUT",
-				data: { "description": newDescription }
+				"url": "todos/" + todo._id,
+				"type": "PUT",
+				"data": { "description": newDescription }
 			}).done(function (responde) {
 				$(".tabs a:nth-child(2) span").trigger("click");
 			}).fail(function (err) {
