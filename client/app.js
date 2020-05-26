@@ -36,9 +36,10 @@ var liaWithDeleteOnClick = function(todo) {
 	console.log("todo.description: " + todo.description);
 	$todoRemoveLink.on("click", function () {
 		$.ajax({
-			"url": "todos.json/" + todo._id,
-			"type": "DELETE",
-			"dataType": "json"
+			url: "todos/" + todo._id,
+			type: "DELETE",
+			dataType: 'jsonp',
+      		jsonp: 'jsonp'
 		}).done(function (responde) {
 			$(".tabs a:first-child span").trigger("click");
 		}).fail(function (err) {
@@ -61,7 +62,8 @@ var liaWithEditOnClick = function (todo) {
 				"url": "todos/" + todo._id,
 				"type": "PUT",
 				"data": { "description": newDescription },
-				"dataType": "json"
+				"dataType": 'jsonp',
+      			"jsonp": 'jsonp'
 			}).done(function (responde) {
 				$(".tabs a:nth-child(2) span").trigger("click");
 			}).fail(function (err) {
