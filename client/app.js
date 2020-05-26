@@ -30,7 +30,7 @@ var organizeByTags = function (toDoObjects) {
 
 var liaWithDeleteOnClick = function(todo) {
 	var $todoListItem = $("<li>").text(todo.description),
-		$todoRemoveLink = $("<a>").attr("href", "todos/" + todo._id);
+		$todoRemoveLink = $("<a>").attr("href", "./todos/" + todo._id);
 	$todoRemoveLink.text("Удалить");
 	console.log("todo._id: " + todo._id);
 	console.log("todo.description: " + todo.description);
