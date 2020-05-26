@@ -5,7 +5,8 @@ var express = require("express"),
 	ToDosController = require("./controllers/todos_controller.js"),
 		services, mongoUrl;
 	
-app.use(express.static(__dirname + "/client"));
+app.use('/',express.static(__dirname + "/client"));
+app.use('/user/:username',express.static(__dirname + "/client"));
 // Это модель Mongoose для задач
 http.createServer(app).listen(3000);
 // командуем Express принять поступающие
@@ -25,3 +26,8 @@ mongoose.connect('mongodb://localhost/amazeriffic', {
 app.get("/todos.json", ToDosController.index);
 app.get("/todos/:id", ToDosController.show);
 app.post("/todos", ToDosController.create);
+
+app.get("/user/:username/todos.json", toDosCвяжем IDontroller.index);
+app.post("/user/:username/todos", toDosCвяжем IDontroller.create);
+app.put("/user/:username/todos/:id", toDosCвяжем IDontroller.update);
+app.delete("/user/:username/todos/:id", toDosCвяжем IDontroller.destroy);
