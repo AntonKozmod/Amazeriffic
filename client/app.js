@@ -51,6 +51,8 @@ var liaWithDeleteOnClick = function(todo) {
 
 var main = function (toDoObjects) {
 	"use strict";
+	// создание пустого массива с вкладками
+	var tabs = [];
 	// добавляем вкладку Новые
 	tabs.push({
 		"name": "Новые",
