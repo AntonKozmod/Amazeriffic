@@ -56,6 +56,23 @@ var liaWithEditOrDeleteOnClick = function (todo, callback) {
 		$todoEditLink = $("<a>").attr("href", "todos/" + todo._id),
 		$todoRemoveLink = $("<a>").attr("href", "todos/" + todo._id);
 
+	$todoEditLink.addClass("linkEdit");
+	$todoRemoveLink.addClass("linkRemove");
+
+	$todoRemoveLink.text("Удалить");
+	$todoRemoveLink.on("click", function () {
+		$.ajax({
+			url: "/todos/" + todo._id,
+			type: "DELETE",
+		}).done(function (responde) {
+			callback();
+		}).fail(function (err) {
+			console.log("error on delete 'todo'!");
+		});
+		return false;
+	});
+	$todoListItem.append($todoRemoveLink);
+
 	$todoEditLink.text("Редактировать");
 	$todoEditLink.on("click", function() {
 		var newDescription = prompt("Введите новое наименование для задачи", todo.description);
@@ -73,20 +90,6 @@ var liaWithEditOrDeleteOnClick = function (todo, callback) {
 		return false;
 	});
 	$todoListItem.append($todoEditLink);
-
-	$todoRemoveLink.text("Удалить");
-	$todoRemoveLink.on("click", function () {
-		$.ajax({
-			url: "/todos/" + todo._id,
-			type: "DELETE",
-		}).done(function (responde) {
-			callback();
-		}).fail(function (err) {
-			console.log("error on delete 'todo'!");
-		});
-		return false;
-	});
-	$todoListItem.append($todoRemoveLink);
 
 	return $todoListItem;
 }
