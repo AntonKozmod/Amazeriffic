@@ -51,7 +51,7 @@ var liaWithDeleteOnClick = function(todo) {
 }
 */
 
-var liaWithEditOrDeleteOnClick = function (todo) {
+var liaWithEditOrDeleteOnClick = function (todo, callback) {
 	var $todoListItem = $("<li>").text(todo.description),
 		$todoEditLink = $("<a>").attr("href", "todos/" + todo._id),
 		$todoRemoveLink = $("<a>").attr("href", "todos/" + todo._id);
