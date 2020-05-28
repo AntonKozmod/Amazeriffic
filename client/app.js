@@ -65,6 +65,7 @@ var liaWithEditOrDeleteOnClick = function (todo) {
 				"type": "PUT",
 				"data": { "description": newDescription },
 			}).done(function (responde) {
+				callback();
 			}).fail(function (err) {
 				console.log("Произошла ошибка: " + err);
 			});
@@ -79,6 +80,7 @@ var liaWithEditOrDeleteOnClick = function (todo) {
 			url: "/todos/" + todo._id,
 			type: "DELETE",
 		}).done(function (responde) {
+			callback();
 		}).fail(function (err) {
 			console.log("error on delete 'todo'!");
 		});
