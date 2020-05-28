@@ -65,7 +65,6 @@ var liaWithEditOrDeleteOnClick = function (todo) {
 				"type": "PUT",
 				"data": { "description": newDescription },
 			}).done(function (responde) {
-				$(".tabs a:nth-child(2) span").trigger("click");
 			}).fail(function (err) {
 				console.log("Произошла ошибка: " + err);
 			});
@@ -80,7 +79,6 @@ var liaWithEditOrDeleteOnClick = function (todo) {
 			url: "/todos/" + todo._id,
 			type: "DELETE",
 		}).done(function (responde) {
-			$(".tabs a:first-child span").trigger("click");
 		}).fail(function (err) {
 			console.log("error on delete 'todo'!");
 		});
@@ -106,7 +104,9 @@ var main = function (toDoObjects) {
 					i;
 				$content = $("<ul>");
 				for (i = toDoObjects.length-1; i>=0; i--) {
-					var $todoListItem = liaWithEditOrDeleteOnClick(toDoObjects[i]);
+					var $todoListItem = liaWithEditOrDeleteOnClick(toDoObjects[i], function() {
+						$(".tabs a:first-child span").trigger("click");
+					});
 					$content.append($todoListItem);
 				}
 				callback(null, $content);
@@ -125,7 +125,9 @@ var main = function (toDoObjects) {
 					i;
 				$content = $("<ul>");
 				for (i = 0; i < toDoObjects.length; i++) {
-					var $todoListItem = liaWithEditOrDeleteOnClick(toDoObjects[i]);
+					var $todoListItem = liaWithEditOrDeleteOnClick(toDoObjects[i], function() {
+						$(".tabs a:nth-child(2) span").trigger("click");
+					});
 					$content.append($todoListItem);
 				}
 				callback(null, $content);
