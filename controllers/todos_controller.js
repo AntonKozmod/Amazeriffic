@@ -56,6 +56,7 @@ ToDosController.create = function (req, res) {
 	var username = req.params.username || null;
 	var newToDo = new ToDo({"description": req.body.description,
 							"tags": req.body.tags});
+	console.log("username": username);
 	User.find({"username": username}, function (err, result) {
 		if (err) {
 			res.send(500);
