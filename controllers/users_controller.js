@@ -55,12 +55,35 @@ UsersController.create = function(req, res) {
 // Обновить существующего пользователя
 UsersController.update = function (req, res) {
 	console.log("Вызвано действие: обновить пользователя");
-	res.send(200);
+	var id = req.params.id;
+	var newUsername = {$set: {username: req.body.username}};
+	User.updateOne({"username": username}, newUsername, function (err,user) {
+		if (err !== null) {
+			res.status(500).json(err);
+		} else {
+			if (user.n === 1 && user.nModified === 1 && user.ok === 1) {
+				res.status(200).json(todo).json({"status": 404});
+			} else {
+				res.status(404);
+			}
+		}
+	});
 };
 // Удалить существующего пользователя
 UsersController.destroy = function (req, res) {
 	console.log("Вызвано действие: удалить пользователя");
-	res.send(200);
+	var username = req.params.username;
+	ToDo.deleteOne({"username": username}, function (err, user) {
+		if (err !== null) {
+			res.status(500).json(err);
+		} else {
+			if (user.n === 1 && user.ok === 1 && user.deletedCount === 1) {
+				res.status(200).json(todo);
+			} else {
+				res.status(404).json({"status": 404});
+			}
+		}
+	});
 };
 
 module.exports = UsersController;
