@@ -181,7 +181,7 @@ var main = function (toDoObjects) {
 					var description = $input.val(),
 						tags = $tagInput.val().split(","),
 						// создаем новый элемент списка задач
-						newToDo = {"description":description, "tags":tags};
+						newToDo = {"description":description, "tags":tags, "username":null};
 					$.post("todos", newToDo, function(result) {
 						$input.val("");
 						$tagInput.val("");
