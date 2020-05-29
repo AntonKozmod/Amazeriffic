@@ -3,7 +3,7 @@ var express = require("express"),
 	app = express(),
 	mongoose = require("mongoose"),
 	ToDosController = require("./controllers/todos_controller.js"),
-		services, mongoUrl;
+	UsersController = require("./controllers/users_controller.js");
 	
 app.use('/',express.static(__dirname + "/client"));
 app.use('/user/:username',express.static(__dirname + "/client"));
@@ -34,8 +34,8 @@ app.post("/user/:username/todos", ToDosController.create);
 app.put("/user/:username/todos/:id", ToDosController.update);
 app.delete("/user/:username/todos/:id", ToDosController.destroy);
 
-app.get("/users.json", usersController.index); 
-app.post("/users", usersController.create); 
-app.get("/users/:username", usersController.show);
-app.put("/users/:username", usersController.update);
-app.delete("/users/:username", usersController.destroy); 
+app.get("/users.json", UsersController.index); 
+app.post("/users", UsersController.create); 
+app.get("/users/:username", UsersController.show);
+app.put("/users/:username", UsersController.update);
+app.delete("/users/:username", UsersController.destroy); 

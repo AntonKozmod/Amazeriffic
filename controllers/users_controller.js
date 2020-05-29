@@ -1,11 +1,18 @@
 var mongoose = require('mongoose'),
-    User = require('../models/user.js');
+    User = require('../models/user.js'),
+    ToDo = require("../models/todo.js");
 
 var UsersController = {};
 
 UsersController.index = function(req, res) {
   console.log('Вызвано действие: UsersController.index');
-  res.send(200);
+  User.find(function (err, users) {
+  		if (err !== null) {
+			res.json(500, err);
+  		} else {
+  			res.status(200).json(users);
+  		}
+  });
 };
 
 // Отобразить пользователя
@@ -14,8 +21,15 @@ UsersController.show = function(req, res) {
   User.find({'username': req.params.username}, function(err, result) {
     if (err) {
       console.log(err);
-    } else if (users.length !== 0) {
-      res.status(200).sendfile("../client/list.html");
+    } else if (result.length !== 0) {
+      ToDo.find({"owner": result[0]._id}, function(err, toDos) {
+      	if (err !== null) {
+      		res.json(500, err);
+      	} else {
+      		res.status(200).json(toDos);
+      	}
+      });
+      //res.status(200).sendFile("../client/list.html", {"root": __dirname});
     } else {
       res.send(404);
     }
@@ -32,7 +46,7 @@ UsersController.create = function(req, res) {
             console.log(err);
             res.send(500, err);
         } else if (result.length !== 0) {
-            res.send(200, "Пользователь уже существует");
+            res.status(501).send("Пользователь уже существует");
             console.log(err);   
             console.log("Пользователь уже существует"); 
         } else {
