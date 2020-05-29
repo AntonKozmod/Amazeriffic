@@ -70,14 +70,17 @@ UsersController.create = function(req, res) {
 // Обновить существующего пользователя
 UsersController.update = function (req, res) {
 	console.log("Вызвано действие: обновить пользователя");
-	var id = req.params.username;
+	var username = req.params.username;
+	console.log("Старое имя пользователя: " + username);
 	var newUsername = {$set: {username: req.body.username}};
+	console.log("Новое имя пользователя: " + req.body.username);
 	User.updateOne({"username": username}, newUsername, function (err,user) {
 		if (err !== null) {
 			res.status(500).json(err);
 		} else {
 			if (user.n === 1 && user.nModified === 1 && user.ok === 1) {
-				res.status(200).json(todo).json({"status": 404});
+				console.log('Изменен');
+				res.status(200).json(user);
 			} else {
 				res.status(404);
 			}
@@ -88,17 +91,17 @@ UsersController.update = function (req, res) {
 UsersController.destroy = function (req, res) {
 	console.log("Вызвано действие: удалить пользователя");
 	var username = req.params.username;
-	ToDo.deleteOne({"username": username}, function (err, user) {
+	User.deleteOne({"username": username}, function (err, user) {
 		if (err !== null) {
 			res.status(500).json(err);
 		} else {
 			if (user.n === 1 && user.ok === 1 && user.deletedCount === 1) {
-				res.status(200).json(todo);
+				res.status(200).json(user);
 			} else {
 				res.status(404).json({"status": 404});
 			}
 		}
 	});
-};
+}
 
 module.exports = UsersController;
