@@ -5,7 +5,7 @@ ToDosController.index = function (req, res) {
 	var username = req.params.username || null,
 		respondWithToDos;
 	respondWithToDos = function (query) {
-		ToDo.find(query, function (err, toDos) { // Обратить внимание на query
+		ToDo.find(query, function (err, toDos) {
 			if (err !== null) {
 				res.json(500, err);
 			} else {
