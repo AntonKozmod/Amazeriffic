@@ -33,7 +33,7 @@ var main = function (UsersObjects) {
 				'url': '/users/'+username,
 				'type': 'GET'
 			}).done(function(responde) {
-				document.location.href = "/users/"+username;
+				window.location.replace('users/' + username + '/');
 			}).fail(function(jqXHR, textStatus, error) {
 				console.log(error);
 				alert("Произошла ошибка!\n"+jqXHR.status + " " + jqXHR.textStatus);	

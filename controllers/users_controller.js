@@ -22,14 +22,15 @@ UsersController.show = function(req, res) {
     if (err) {
       console.log(err);
     } else if (result.length !== 0) {
-      ToDo.find({"owner": result[0]._id}, function(err, toDos) {
+      /*ToDo.find({"owner": result[0]._id}, function(err, toDos) {
       	if (err !== null) {
       		res.json(500, err);
       	} else {
+      		document.location.href = "/users/"+username;
       		res.status(200).json(toDos);
       	}
-      });
-      //res.status(200).sendFile("../client/list.html", {"root": __dirname});
+      });*/
+      	res.sendfile('./client/list.html');
     } else {
       res.send(404);
     }
